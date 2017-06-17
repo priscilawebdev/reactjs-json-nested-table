@@ -1,7 +1,6 @@
 import React, { PropTypes as T } from 'react'
 
 const TableRow = ({
-  moduleName = 'TableRow',
   record
 } = {}) => (
   <td>{record}</td>

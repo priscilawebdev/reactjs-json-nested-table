@@ -1,7 +1,6 @@
 import React, { PropTypes as T } from 'react'
 
 const TableHeader = ({
-  moduleName = 'TableHeader',
   item
 } = {}) => (
   <th>{item}</th>

@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
-  entry: [ 'bootstrap-loader', './src/App.js' ],
+  entry: [ 'font-awesome-webpack', './src/App.js' ],
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
@@ -76,6 +76,27 @@ module.exports = {
             sourceMap: true
           }
         }]
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\react.js$/,
+        loader: 'webpack-bem-loader',
+        options: {
+          naming: 'react',
+          levels: path.resolve(__dirname, 'src'),
+          techs: ['js', 'css'],
+          techMap: {
+            js: ['react.js']
+          },
+          langs: ['en']
+        }
       }
     ]
   }
