@@ -1,10 +1,11 @@
 import React, { PropTypes as T } from 'react'
 
 const TableHeading = ({
+  moduleName = 'TableHeading',
   text,
   colSpan
 } = {}) => (
-  <tr>
+  <tr className={moduleName}>
     <th colSpan={colSpan}>{text}</th>
   </tr>
 )

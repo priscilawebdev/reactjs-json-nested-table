@@ -1,12 +1,14 @@
 import React, { PropTypes as T } from 'react'
-import { compose, pure, setPropTypes } from 'recompose'
+import { compose, pure, setPropTypes, withState } from 'recompose'
 import { isEmpty } from 'lodash'
 import Table from '../components/Table'
 import TableHeader from '../components/TableHeader'
 import TableRow from '../components/TableRow'
 import TableHeading from '../components/TableHeading'
+import TableArrowCell from '../components/TableArrowCell'
+import RemoveButton from '../components/RemoveButton'
 
-const getKids = (nodes) => {
+const getKids = (nodes, isKidsExpanded) => {
   let kids
 
   if (!isEmpty(nodes)) {
@@ -20,6 +22,7 @@ const getKids = (nodes) => {
           data={result.data}
           kids={result.kids}
           heading={generalTitles}
+          expanded={isKidsExpanded}
         />
       )
     })
@@ -30,7 +33,12 @@ const getKids = (nodes) => {
 export const renderTableContainer = ({
   data,
   kids,
-  heading = ''
+  heading = '',
+  setIsKidsExpanded,
+  isKidsExpanded,
+  expanded,
+  isVisible,
+  setIsVisible
 } = {}) => {
   // get headers **Object.keys**
   const header = Object.keys(data).map((row, index) => <TableHeader key={index} item={row} />)
@@ -42,7 +50,20 @@ export const renderTableContainer = ({
   const generalTitles = !!heading && (<TableHeading colSpan={header.length + 1} text={heading} />)
 
   // get kids
-  const children = getKids(kids)
+  const children = getKids(kids, isKidsExpanded)
+
+  // get arrow cell
+  const arrowCell = (
+    <TableArrowCell
+      visible={!isEmpty(kids)}
+      expanded={isKidsExpanded}
+      handleClickEvent={() => setIsKidsExpanded(!isKidsExpanded)}
+    />
+  )
+
+  const removeButton = (
+    <RemoveButton handleClickEvent={() => setIsVisible(!isVisible)} />
+  )
 
   return (
     <Table
@@ -51,6 +72,10 @@ export const renderTableContainer = ({
       kids={children}
       kidsColSpan={header.length + 1}
       heading={generalTitles}
+      arrowCell={arrowCell}
+      expanded={expanded}
+      visible={isVisible}
+      removeButton={removeButton}
     />
   )
 }
@@ -59,12 +84,15 @@ const propTypes = {
   data: T.object.isRequired,
   kids: T.object,
   heading: T.string,
-  expandedAll: T.bool
+  isKidsExpanded: T.bool,
+  visible: T.bool
 }
 
 const TableContainer = compose(
   setPropTypes(propTypes),
-  pure
+  pure,
+  withState('isKidsExpanded', 'setIsKidsExpanded', false),
+  withState('isVisible', 'setIsVisible', true)
 )(renderTableContainer)
 
 export default TableContainer

@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
-  entry: [ 'font-awesome-webpack', './src/App.js' ],
+  entry: './src/App.js',
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',

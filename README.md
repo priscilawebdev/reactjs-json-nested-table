@@ -19,7 +19,7 @@ yarn install or npm install
 
 * Once all the dependencies are installed, just run, from the root folder:
 ```
-yarn start or npm run start
+yarn run start or npm run start
 ```
 
 Now you should be seeing the app running in your browser. :)

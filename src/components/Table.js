@@ -1,5 +1,4 @@
 import React, { PropTypes as T } from 'react'
-import { Link } from 'react-router-dom'
 
 const Table = ({
   moduleName = 'Table',
@@ -7,29 +6,25 @@ const Table = ({
   row,
   kids,
   kidsColSpan,
-  heading
+  heading,
+  expanded = true,
+  visible = true,
+  arrowCell,
+  removeButton
 } = {}) => (
   <div className={moduleName}>
-    <div className='col-md-12'>
-      <table className='table table-bordered table-striped'>
+    <div className={`collapse ${expanded ? 'in' : 'hidden'} ${!visible ? 'hide' : ''}`}>
+      <table className='table table-bordered table-stripe'>
         <thead>
           {heading}
-          <tr className='success'>
-            <th>
-              <Link to='/'>
-                <i className='fa fa-trash-o fa-lg' />
-              </Link>
-            </th>
+          <tr>
+            <th>{removeButton}</th>
             {header}
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
-              <Link to='/'>
-                <i className='fa fa-arrow-circle-o-right fa-lg' />
-              </Link>
-            </td>
+            <td className='text-center'>{arrowCell}</td>
             {row}
           </tr>
           <tr>
@@ -46,9 +41,11 @@ const Table = ({
 Table.propTypes = {
   header: T.node.isRequired,
   row: T.node.isRequired,
+  arrowCell: T.node.isRequired,
   kids: T.arrayOf(T.object),
   kidsColSpan: T.number.isRequired,
-  heading: T.node
+  heading: T.node,
+  removeButton: T.node
 }
 
 export default Table

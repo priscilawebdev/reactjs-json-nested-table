@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TableContainer from './containers/TableContainer'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import './styles.sass'
 import preload from '../public/data'
 
 const App = () => (
@@ -19,7 +20,6 @@ const App = () => (
                   key={index}
                   data={info.data}
                   kids={info.kids}
-                  expandedAll
                 />
               ))
             }
