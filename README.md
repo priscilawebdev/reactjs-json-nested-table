@@ -8,7 +8,7 @@ When you click on item, direct child items are hidden/shown.
 
 Setting up this repository to get going is extremely simple.
 
-Assuming you already have installed Node and yarn/npm (if you don't, [check how to here](https://nodejs.org/en/)), all you'll need to do is:
+Assuming you already have installed Node  (if you don't, [check how to here](https://nodejs.org/en/)) and yarn/npm, all you'll need to do is:
 
 * Open the terminal in the root folder of the project
 
